@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">What to eat?</string>
-    <string name="title_activity_create_recipe">Create a new recipe</string>
-
+    <string name="app_name">Qu\'est-ce qu\'on mange?</string>
+    <string name="title_activity_create_recipe">Nouvelle recette</string>
 
     <!-- Units -->
     <string name="ml">ml</string>
     <string name="liters">l</string>
-    <string name="cups">cup</string>
-    <string name="teaspoon">tsp</string>
-    <string name="tablespoon">tbp</string>
+    <string name="cups">tasse</string>
+    <string name="teaspoon">c.a.t</string>
+    <string name="tablespoon">c.a.s</string>
     <string name="floz">fl oz</string>
     <string name="gallon">gal</string>
     <string name="gram">g</string>
-    <string name="pound">lbs</string>
+    <string name="pound">lb</string>
     <string name="kilogram">kg</string>
     <string name="ounce">oz</string>
 </resources>

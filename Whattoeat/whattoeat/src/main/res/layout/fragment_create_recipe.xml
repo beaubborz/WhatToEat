@@ -28,19 +28,34 @@
                 android:hint="Recipe's name"
                 android:id="@+id/input_name"/>
 
-            <fragment
-                android:name="com.beaubbe.whattoeat.com.beaubbe.whattoeat.widgets.IngredientInput"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/ingredient_input"
+                android:text="Ingredients:"
                 android:layout_below="@+id/input_name"
-                android:layout_margin="10dp"
-                tools:layout="@layout/ingredient_input_widget" />
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/label_ingredients" />
 
-            <ListView
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/ingredient_input"/>
+                android:id="@+id/ingredient_list"
+                android:layout_below="@+id/label_ingredients"/>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/label_ingredients">
+                <ImageButton
+                    android:layout_height="25dp"
+                    android:layout_width="25dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/add_button"
+                    android:onClick="addIngredient"
+                    android:id="@+id/addIngredient"/>
+            </FrameLayout>
 
         </RelativeLayout>
     </ScrollView>
