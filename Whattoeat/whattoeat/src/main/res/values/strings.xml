@@ -3,7 +3,15 @@
 
     <string name="app_name">What to eat?</string>
     <string name="title_activity_create_recipe">Create a new recipe</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
 
+    <string-array  name="measurement_units">
+        <item>units</item>
+        <item>g</item>
+        <item>lb</item>
+        <item>oz</item>
+        <item>cup</item>
+        <item>tsp</item>
+        <item>tbp</item>
+        <item>L</item>
+    </string-array>
 </resources>
