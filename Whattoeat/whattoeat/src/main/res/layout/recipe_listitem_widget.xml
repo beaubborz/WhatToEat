@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:padding="15dp">
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Spagatti"
+    android:textStyle="bold"
+    android:id="@+id/recipe_name"
+    android:textSize="20dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/recipe_name"
+        android:id="@+id/duration_label"
+        android:text="Duration: "/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/duration"
+        android:layout_toRightOf="@+id/duration_label"
+        android:layout_below="@+id/recipe_name"
+        android:textColor="#666666"
+        android:text="40 minutes"/>
+</RelativeLayout>

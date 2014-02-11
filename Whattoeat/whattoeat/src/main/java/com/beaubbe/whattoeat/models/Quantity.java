@@ -12,14 +12,69 @@ import java.util.List;
  */
 public class Quantity
 {
-    double amount;
-    Unit unit;
+    private double amount;
+    private Unit unit;
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public Unit getUnit() {
+        return unit;
+    }
+
+    public void setUnit(Unit unit) {
+        this.unit = unit;
+    }
 
     public static class Unit
     {
-        Type type;
-        Category category;
-        String symbol;
+        private Type type;
+        private Category category;
+        private String symbol;
+
+        public Unit(Context c, int type) {
+            List<Unit> uts = this.getAsList(c);
+
+            for(Unit u:uts)
+            {
+                if (u.type.ordinal() == type)
+                {
+                    this.type = u.type;
+                    this.category = u.category;
+                    this.symbol = u.symbol;
+                    break;
+                }
+            }
+        }
+
+        public Type getType() {
+            return type;
+        }
+
+        public void setType(Type type) {
+            this.type = type;
+        }
+
+        public Category getCategory() {
+            return category;
+        }
+
+        public void setCategory(Category category) {
+            this.category = category;
+        }
+
+        public String getSymbol() {
+            return symbol;
+        }
+
+        public void setSymbol(String symbol) {
+            this.symbol = symbol;
+        }
 
         public Unit(Type type, Category category, String symbol)
         {
@@ -34,6 +89,7 @@ public class Quantity
         }
 
         public static List<Unit> getAsList(Context c) {
+            final Unit UNIT = new Unit(Type.unit, Category.NUMBER, c.getString(R.string.unit));
             final Unit ML = new Unit(Type.ml, Category.VOLUME, c.getString(R.string.ml));
             final Unit LITERS = new Unit(Type.liter, Category.VOLUME, c.getString(R.string.liters));
             final Unit CUP = new Unit(Type.cup, Category.VOLUME, c.getString(R.string.cups));
@@ -48,6 +104,7 @@ public class Quantity
 
             final ArrayList<Unit> list = new ArrayList<Unit>();
 
+            list.add(UNIT);
             list.add(ML);
             list.add(LITERS);
             list.add(CUP);
@@ -65,12 +122,12 @@ public class Quantity
 
         public static enum Category
         {
-            VOLUME, MASS
+            VOLUME, MASS, NUMBER
         }
 
         public static enum Type
         {
-            ml, liter, cup, teaspoon, tablespoon, floz, gallon,
+            unit, ml, liter, cup, teaspoon, tablespoon, floz, gallon,
             gram, pound, kilogram, ounce
         }
     }

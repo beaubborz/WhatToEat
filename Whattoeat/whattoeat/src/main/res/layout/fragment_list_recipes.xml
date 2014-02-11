@@ -1,0 +1,46 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EEEEEE"
+    tools:context="com.beaubbe.whattoeat.activities.ListRecipes$PlaceholderFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Choose a recipe!"
+        android:id="@+id/recipeHeader"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:padding="10dp"
+        android:background="#EEEEEE"/>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@+id/recipeHeader">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:orientation="vertical"
+        android:id="@+id/recipe_list"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/recipe_list"
+        android:background="#AAAAFF"
+        android:padding="10dp"
+        android:onClick="createRecipe">
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:src="@drawable/add_button"/>
+        </FrameLayout>
+    </RelativeLayout>
+</ScrollView>
+
+</RelativeLayout>

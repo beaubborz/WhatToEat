@@ -7,21 +7,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView">
-    <EditText
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/ingredient_name"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@+id/qty"/>
-    <EditText
+    <TextView
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:id="@+id/qty"
         android:layout_alignParentBottom="true"
-        android:inputType="numberDecimal"
         android:layout_toLeftOf="@+id/unit" />
-    <Spinner
+    <TextView
         android:layout_width="75dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

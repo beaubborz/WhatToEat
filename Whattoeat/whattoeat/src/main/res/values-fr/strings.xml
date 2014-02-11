@@ -4,7 +4,16 @@
     <string name="app_name">Qu\'est-ce qu\'on mange?</string>
     <string name="title_activity_create_recipe">Nouvelle recette</string>
 
+    <!-- input error messages -->
+    <string name="error_name_cannot_be_blank">Vous devez entrer un nom</string>
+    <string name="error_ingredient_id_null">Aucun ingrédient référencé</string>
+    <string name="error_recipe_id_null">Aucune recette référencée</string>
+    <string name="error_duplicate_steps">Même numéro pour plusieurs étapes</string>
+    <string name="error_description_cannot_be_blank">Vous devez entrer une description</string>
+
+
     <!-- Units -->
+    <string name="unit">unité</string>
     <string name="ml">ml</string>
     <string name="liters">l</string>
     <string name="cups">tasse</string>

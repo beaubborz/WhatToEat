@@ -4,8 +4,15 @@
     <string name="app_name">What to eat?</string>
     <string name="title_activity_create_recipe">Create a new recipe</string>
 
+    <!-- input error messages -->
+    <string name="error_name_cannot_be_blank">Name cannot be blank</string>
+    <string name="error_ingredient_id_null">Missing ingredient id</string>
+    <string name="error_recipe_id_null">Missing recipe id</string>
+    <string name="error_duplicate_steps">Multiple steps with the same number</string>
+    <string name="error_description_cannot_be_blank">Description cannot be blank</string>
 
     <!-- Units -->
+    <string name="unit">unit</string>
     <string name="ml">ml</string>
     <string name="liters">l</string>
     <string name="cups">cup</string>
@@ -17,4 +24,18 @@
     <string name="pound">lbs</string>
     <string name="kilogram">kg</string>
     <string name="ounce">oz</string>
+
+    <!-- time duration unit -->
+    <string-array name="time_units">
+        <item>hours</item>
+        <item>minutes</item>
+        <item>seconds</item>
+    </string-array>
+
+    <string name="title_activity_list_recipes">ListRecipes</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_view_recipe">ViewRecipe</string>
+    <string name="title_activity_edit_recipe">EditRecipe</string>
+
 </resources>
