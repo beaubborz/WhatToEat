@@ -194,6 +194,7 @@ public class CreateRecipe extends ActionBarActivity {
 
         //return to the recipe list.
         Intent intent = new Intent(this, ListRecipes.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 

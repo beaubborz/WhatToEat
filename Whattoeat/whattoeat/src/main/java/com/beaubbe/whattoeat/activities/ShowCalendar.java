@@ -14,6 +14,10 @@ import android.widget.CalendarView;
 import android.widget.FrameLayout;
 
 import com.beaubbe.whattoeat.R;
+import com.beaubbe.whattoeat.widgets.DayPreview;
+
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class ShowCalendar extends ActionBarActivity {
 
@@ -61,16 +65,25 @@ public class ShowCalendar extends ActionBarActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_show_calendar, container, false);
+            final View rootView = inflater.inflate(R.layout.fragment_show_calendar, container, false);
 
             FrameLayout calendarContainer = (FrameLayout)rootView.findViewById(R.id.calendar_container);
 
             //create the calendar widget here:
-            CalendarView calendar = new CalendarView(getActivity());
+            final CalendarView calendar = new CalendarView(getActivity());
             calendar.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-            calendar.setMinDate(System.currentTimeMillis()); /* workaround that prevents an error since default date = now  */
+           // calendar.setMinDate(System.currentTimeMillis()); /* workaround that prevents an error since default date = now  */
             calendar.setDate(System.currentTimeMillis());
             calendarContainer.addView(calendar);
+            calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+                @Override
+                public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
+                    GregorianCalendar gc = new GregorianCalendar(year, month, dayOfMonth, 12, 00);
+                    DayPreview prev = (DayPreview) getFragmentManager().findFragmentById(R.id.day_preview);
+                    prev.setDate(gc.getTimeInMillis());
+                }
+            });
+
             return rootView;
         }
     }

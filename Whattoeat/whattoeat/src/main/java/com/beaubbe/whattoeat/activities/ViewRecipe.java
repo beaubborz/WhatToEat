@@ -82,6 +82,7 @@ public class ViewRecipe extends FragmentActivity {
                         dialog.hide();
                         recipe.removeFromDatabase();
                         Intent intent = new Intent(getApplicationContext(), ListRecipes.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                     }
                 });

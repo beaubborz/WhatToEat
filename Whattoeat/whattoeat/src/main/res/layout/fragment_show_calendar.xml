@@ -17,6 +17,7 @@
         <fragment
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:id="@+id/day_preview"
             android:name="com.beaubbe.whattoeat.widgets.DayPreview"
             tools:layout="@layout/day_preview_widget" />
     </FrameLayout>

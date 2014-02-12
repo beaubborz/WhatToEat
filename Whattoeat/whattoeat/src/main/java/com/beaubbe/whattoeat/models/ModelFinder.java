@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -19,6 +20,60 @@ public class ModelFinder extends DatabaseModel
     {
         super(c);
         this.context=c;
+    }
+
+    public List<MenuEntry> getMenuEntriesForDate(long date)
+    {
+        ArrayList<MenuEntry> entries = new ArrayList<MenuEntry>();
+
+        final GregorianCalendar cal = new GregorianCalendar();
+        cal.setTimeInMillis(date);
+
+        final GregorianCalendar startOfDay = new GregorianCalendar();
+        startOfDay.set(GregorianCalendar.YEAR, cal.get(GregorianCalendar.YEAR));
+        startOfDay.set(GregorianCalendar.MONTH, cal.get(GregorianCalendar.MONTH));
+        startOfDay.set(GregorianCalendar.DATE, cal.get(GregorianCalendar.DATE));
+        startOfDay.set(GregorianCalendar.HOUR,0);
+        startOfDay.set(GregorianCalendar.MINUTE,0);
+        startOfDay.set(GregorianCalendar.SECOND,0);
+
+        final GregorianCalendar endOfDay = new GregorianCalendar();
+        endOfDay.set(GregorianCalendar.YEAR, cal.get(GregorianCalendar.YEAR));
+        endOfDay.set(GregorianCalendar.MONTH, cal.get(GregorianCalendar.MONTH));
+        endOfDay.set(GregorianCalendar.DATE, cal.get(GregorianCalendar.DATE));
+        endOfDay.set(GregorianCalendar.HOUR,23);
+        endOfDay.set(GregorianCalendar.MINUTE,59);
+        endOfDay.set(GregorianCalendar.SECOND,59);
+
+        final String sqlQuery = "SELECT * FROM "+MenuEntry.TABLE_NAME+" WHERE "+MenuEntry.FIELD_DATETIME+" BETWEEN ? AND ?";
+        SQLiteDatabase db = getDatabase();
+        Cursor cursor = db.rawQuery(sqlQuery,new String[]{
+                String.valueOf(startOfDay.getTimeInMillis()),
+                String.valueOf(endOfDay.getTimeInMillis())});
+
+        for(int i=0;i<cursor.getCount();i++)
+        {
+            final MenuEntry me = new MenuEntry(context);
+            cursor.moveToPosition(i);
+            me.setId(cursor.getLong(cursor.getColumnIndex(MenuEntry.FIELD_ID)));
+            Recipe r = new Recipe(context);
+            r.setId(cursor.getLong(cursor.getColumnIndex(MenuEntry.FIELD_RECIPE_ID)));
+            me.setRecipe(r);
+            me.setDatetime(cursor.getLong(cursor.getColumnIndex(MenuEntry.FIELD_DATETIME)));
+            me.setQuantityMultiplier(cursor.getInt(cursor.getColumnIndex(MenuEntry.FIELD_QUANTITY_MULTIPLIER)));
+            entries.add(me);
+        }
+        cursor.close();
+        db.close();
+        closeDbConnexion();
+
+        for(MenuEntry me:entries)
+        {
+            final Recipe r = this.getRecipe(me.getRecipe().getId());
+            me.setRecipe(r);
+        }
+
+        return entries;
     }
 
     public Recipe getRecipe(long id)

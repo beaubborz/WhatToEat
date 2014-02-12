@@ -4,10 +4,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.beaubbe.whattoeat.models.Ingredient;
-import com.beaubbe.whattoeat.models.Recipe;
-import com.beaubbe.whattoeat.models.Step;
-
 /**
  * Created by Gab on 06/02/14.
  */
@@ -49,12 +45,12 @@ public class DatabaseManager extends SQLiteOpenHelper {
                 "FOREIGN KEY ("+RecipeIngredient.FIELD_INGREDIENT_ID+") REFERENCES "+Ingredient.TABLE_NAME+"("+Ingredient.FIELD_ID+")"+
                 ")";
 
-        final String menu_SQL = "CREATE TABLE "+Menu.TABLE_NAME+"(" +
-                Menu.FIELD_ID+" INTEGER PRIMARY KEY AUTOINCREMENT," +
-                Menu.FIELD_RECIPE_ID+" INTEGER NOT NULL," +
-                Menu.FIELD_DATETIME+" TEXT NOT NULL," +
-                Menu.FIELD_QUANTITY_MULTIPLIER+" REAL," +
-                "FOREIGN KEY ("+Menu.FIELD_RECIPE_ID+") REFERENCES "+Recipe.TABLE_NAME+"("+Recipe.FIELD_ID+")" +
+        final String menu_SQL = "CREATE TABLE "+ MenuEntry.TABLE_NAME+"(" +
+                MenuEntry.FIELD_ID+" INTEGER PRIMARY KEY AUTOINCREMENT," +
+                MenuEntry.FIELD_RECIPE_ID+" INTEGER NOT NULL," +
+                MenuEntry.FIELD_DATETIME+" INTEGER NOT NULL," +
+                MenuEntry.FIELD_QUANTITY_MULTIPLIER+" REAL," +
+                "FOREIGN KEY ("+ MenuEntry.FIELD_RECIPE_ID+") REFERENCES "+Recipe.TABLE_NAME+"("+Recipe.FIELD_ID+")" +
                 ")";
 
         //fais le lien entre les ingredients de chaque recette avec sa quantite.

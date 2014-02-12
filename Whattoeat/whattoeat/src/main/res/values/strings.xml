@@ -10,6 +10,7 @@
     <string name="error_recipe_id_null">Missing recipe id</string>
     <string name="error_duplicate_steps">Multiple steps with the same number</string>
     <string name="error_description_cannot_be_blank">Description cannot be blank</string>
+    <string name="error_quantity_must_be_positive">Quantity must be positive</string>
 
     <!-- Units -->
     <string name="unit">unit</string>
@@ -39,5 +40,6 @@
     <string name="title_activity_edit_recipe">EditRecipe</string>
     <string name="title_activity_main_menu">MainMenu</string>
     <string name="title_activity_show_calendar">ShowCalendar</string>
+    <string name="error_date_should_not_be_null">Date is required</string>
 
 </resources>
