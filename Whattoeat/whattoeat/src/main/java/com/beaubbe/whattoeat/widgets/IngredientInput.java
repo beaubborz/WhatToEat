@@ -6,12 +6,16 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.ListAdapter;
 import android.widget.Spinner;
 
 import com.beaubbe.whattoeat.R;
 import com.beaubbe.whattoeat.models.Ingredient;
+import com.beaubbe.whattoeat.models.ModelFinder;
 import com.beaubbe.whattoeat.models.Quantity;
 import com.beaubbe.whattoeat.models.RecipeIngredient;
 
@@ -58,12 +62,16 @@ public class IngredientInput extends Fragment
         if(ingredientName.length()==0 && quantityString.length()==0)
             return null;
 
-        Ingredient i = recipeIngredient.getIngredient();
+        Ingredient i = new ModelFinder(context).getIngredientByName(ingredientName);
 
         if(i==null)
+        {
             i = new Ingredient(context);
+            i.setName(ingredientName);
+        }
 
-        i.setName(ingredientName);
+
+
         recipeIngredient.setIngredient(i);
 
         Quantity qty = recipeIngredient.getQuantity();
@@ -85,7 +93,8 @@ public class IngredientInput extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.ingredient_input_widget, container, false);
 
-        EditText name = (EditText)root.findViewById(R.id.ingredient_name);
+        AutoCompleteTextView name = (AutoCompleteTextView)root.findViewById(R.id.ingredient_name);
+        name.setAdapter(new ArrayAdapter<Ingredient>(context, android.R.layout.simple_dropdown_item_1line, new ModelFinder(context).getIngredients()));
 
         //set name, (for use as update element)
         if(recipeIngredient.getIngredient()!=null)

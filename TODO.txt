@@ -1,0 +1,28 @@
+---- refactoring----
+remplacer les string hard-coded par des ressources @string/**** pour la traduction.
+remplacer les margin/colors/etc par des @ressource/styles.xml
+
+---- recettes ----
+Creer recettes  -  DONE!
+Browse recettes  -  DONE!
+Executer recettes - pertinent..? au pire on lis la recette dans View et cest tout...
+filtrer liste des recettes par ingredient, temps de preparation...
+
+---- menu de la semaine ----
+Afficher un calendrier
+Placer des recettes dans les cases de jours du calendrier
+Retirer des recettes du menu.
+
+----- epicerie -----
+genere une liste d'epicerie selon les recettes du menu.
+on peux ajouter des items / supprimer des items si on en a deja.
+on peut executer une epicerie, qui affiche la liste et on peux cocher les items quon a.
+
+----- widget ----
+Creer un home screen widget qui affiche ce que tu mange aujourd'hui / demain...
+
+----- online functionalities -----
+connecter sur un service web pour:
+publier des recettes
+downloader des recettes
+Donner une note aux recettes dispo. online

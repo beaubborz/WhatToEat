@@ -49,7 +49,6 @@ public class Ingredient extends DatabaseModel
 
         //prepare the data:
         ContentValues values = new ContentValues();
-        values.put(FIELD_ID, id);
         values.put(FIELD_NAME, name);
 
         if(getId() == 0)
@@ -58,6 +57,7 @@ public class Ingredient extends DatabaseModel
         }
         else
         {
+            values.put(FIELD_ID, getId());
             db.update(TABLE_NAME, values, FIELD_ID+"="+getId(), null);
         }
 
@@ -89,5 +89,10 @@ public class Ingredient extends DatabaseModel
             throw new SQLException("This item is still used by some RecipeIngredients!");
 
         return db.delete(TABLE_NAME, Ingredient.FIELD_ID+"="+getId(), null)>0;
+    }
+
+    @Override
+    public String toString() {
+        return getName();
     }
 }

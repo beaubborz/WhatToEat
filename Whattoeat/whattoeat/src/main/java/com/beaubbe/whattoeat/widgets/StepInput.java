@@ -72,14 +72,33 @@ public class StepInput extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.step_input_widget, container, false);
-        this.root= root;
-        TextView stepLabel = (TextView) root.findViewById(R.id.step_number);
-        TextView duration = (TextView) root.findViewById(R.id.duration);
-        TextView description = (TextView) root.findViewById(R.id.description);
-        stepLabel.setText(String.valueOf(step.getStep()));
-        duration.setText(String.valueOf(step.getDuration()));
-        description.setText(String.valueOf(step.getDescription()));
+        this.root = inflater.inflate(R.layout.step_input_widget, container, false);
+
+        if(step.getId()>0)
+        {
+            TextView stepLabel = (TextView) root.findViewById(R.id.step_number);
+            TextView description = (TextView) root.findViewById(R.id.description);
+            TextView duration = (TextView) root.findViewById(R.id.duration);
+            Spinner durationType = (Spinner) root.findViewById(R.id.duration_type);
+            stepLabel.setText(String.valueOf(step.getStep()));
+            description.setText(String.valueOf(step.getDescription()));
+
+            //duration:
+            double d = step.getDuration();
+            int dType = 2; // [2] = seconds
+            if(d>=3600)
+            {
+                d /= 3600.0;
+                dType = 0;
+            }
+            else if(d>=60)
+            {
+                d /= 60;
+                dType = 1;
+            }
+            duration.setText(String.valueOf(d));
+            durationType.setSelection(dType);
+        }
 
         return root;
     }

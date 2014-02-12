@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -127,7 +126,10 @@ public class ModelFinder extends DatabaseModel
 
         //empty set, stops here.
         if(recipeCursor.getCount()==0)
+        {
+            closeDbConnexion();
             return new ArrayList<Recipe>();
+        }
 
         recipeCursor.moveToFirst();
 
@@ -218,6 +220,38 @@ public class ModelFinder extends DatabaseModel
     }
 
 
+    public List<Ingredient> getIngredients()
+    {
+        SQLiteDatabase db = getDatabase();
+        final String query = "SELECT * FROM "+Ingredient.TABLE_NAME;
+        ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
+        Cursor cursor = db.rawQuery(query, null);
+
+        if(cursor.getCount() == 0)
+        {
+            closeDbConnexion();
+            return ingredients;
+        }
+
+        cursor.moveToFirst();
+
+        do
+        {
+            final Ingredient i = new Ingredient(context);
+
+            i.setId(cursor.getLong(0));
+            i.setName(cursor.getString(1));
+
+            ingredients.add(i);
+
+        }while(cursor.moveToNext());
+
+
+        closeDbConnexion();
+
+        return ingredients;
+    }
+
     @Override
     public boolean save(SQLiteDatabase db) {
         throw new NoSuchMethodError();
@@ -231,5 +265,27 @@ public class ModelFinder extends DatabaseModel
     @Override
     public boolean removeFromDatabase(SQLiteDatabase db) {
         throw new NoSuchMethodError();
+    }
+
+    public Ingredient getIngredientByName(String ingredientName) {
+        Ingredient ingredient=null;
+        final String query = "SELECT * FROM "+Ingredient.TABLE_NAME+" WHERE " +
+                "UPPER("+Ingredient.FIELD_NAME+") LIKE ?";
+
+        SQLiteDatabase db = getDatabase();
+
+        Cursor cursor = db.rawQuery(query, new String[]{ingredientName.toUpperCase()});
+
+        if(cursor.getCount()>0)
+        {
+            cursor.moveToFirst();
+            ingredient = new Ingredient(context);
+            ingredient.setId(cursor.getLong(0));
+            ingredient.setName(cursor.getString(1));
+        }
+
+        db.close();
+        closeDbConnexion();
+        return ingredient;
     }
 }

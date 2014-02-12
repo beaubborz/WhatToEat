@@ -37,5 +37,7 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_view_recipe">ViewRecipe</string>
     <string name="title_activity_edit_recipe">EditRecipe</string>
+    <string name="title_activity_main_menu">MainMenu</string>
+    <string name="title_activity_show_calendar">ShowCalendar</string>
 
 </resources>

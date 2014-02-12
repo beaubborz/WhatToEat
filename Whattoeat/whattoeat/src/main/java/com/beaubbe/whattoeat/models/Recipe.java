@@ -55,7 +55,7 @@ public class Recipe extends DatabaseModel
         return steps;
     }
 
-    public void addStep(Step step) {
+        public void addStep(Step step) {
         steps.add(step);
     }
 
