@@ -76,9 +76,20 @@ public class ListRecipes extends ActionBarActivity {
                             item.setBackground(Color.WHITE);
                             if(motionEvent.getAction()==MotionEvent.ACTION_UP)
                             {
-                                Intent intent = new Intent(getActivity(), ViewRecipe.class);
-                                intent.putExtra("id", r.getId());
-                                startActivity(intent);
+                                if(getActivity().getCallingActivity()==null)
+                                {
+                                    Intent intent = new Intent(getActivity(), ViewRecipe.class);
+                                    intent.putExtra("id", r.getId());
+                                    startActivity(intent);
+                                }
+                                else
+                                {
+                                    //we want this item to return the selected recipe's id.
+                                    Intent returnIntent = new Intent();
+                                    returnIntent.putExtra("recipe_id", r.getId());
+                                    getActivity().setResult(RESULT_OK, returnIntent);
+                                    getActivity().finish();
+                                }
                             }
                         }
                         return false;
@@ -87,6 +98,12 @@ public class ListRecipes extends ActionBarActivity {
                 transaction.add(R.id.recipe_list, item);
             }
             transaction.commit();
+
+            //we hide the create button if we are on a 'select' page.
+            if(getActivity().getCallingActivity()!=null)
+            {
+                rootView.findViewById(R.id.add_button).setVisibility(View.GONE);
+            }
 
             return rootView;
         }

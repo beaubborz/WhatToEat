@@ -45,11 +45,13 @@ public class ModelFinder extends DatabaseModel
         endOfDay.set(GregorianCalendar.MINUTE,59);
         endOfDay.set(GregorianCalendar.SECOND,59);
 
-        final String sqlQuery = "SELECT * FROM "+MenuEntry.TABLE_NAME+" WHERE "+MenuEntry.FIELD_DATETIME+" BETWEEN ? AND ?";
         SQLiteDatabase db = getDatabase();
-        Cursor cursor = db.rawQuery(sqlQuery,new String[]{
-                String.valueOf(startOfDay.getTimeInMillis()),
-                String.valueOf(endOfDay.getTimeInMillis())});
+        final String sqlQuery = "SELECT * FROM "+MenuEntry.TABLE_NAME+" WHERE "+MenuEntry.FIELD_DATETIME+
+                " BETWEEN "+
+                 startOfDay.getTimeInMillis()+
+                " AND "+
+                endOfDay.getTimeInMillis();
+        Cursor cursor = db.rawQuery(sqlQuery, null);
 
         for(int i=0;i<cursor.getCount();i++)
         {

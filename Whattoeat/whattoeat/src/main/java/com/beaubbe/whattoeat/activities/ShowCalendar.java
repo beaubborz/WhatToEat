@@ -1,5 +1,7 @@
 package com.beaubbe.whattoeat.activities;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -14,12 +16,28 @@ import android.widget.CalendarView;
 import android.widget.FrameLayout;
 
 import com.beaubbe.whattoeat.R;
+import com.beaubbe.whattoeat.models.MenuEntry;
+import com.beaubbe.whattoeat.models.ModelFinder;
 import com.beaubbe.whattoeat.widgets.DayPreview;
 
 import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class ShowCalendar extends ActionBarActivity {
+
+    public static final int REQUEST_CHOOSE_RECIPE = 1;
+
+
+    private long selectedDate = System.currentTimeMillis();
+
+
+    public long getSelectedDate() {
+        return selectedDate;
+    }
+
+    public void setSelectedDate(long selectedDate) {
+        this.selectedDate = selectedDate;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,25 +51,27 @@ public class ShowCalendar extends ActionBarActivity {
         }
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.show_calendar, menu);
-        return true;
+    public void addRecipeToDate(View view)
+    {
+        Intent intent = new Intent(this, ListRecipes.class);
+        startActivityForResult(intent, REQUEST_CHOOSE_RECIPE);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == REQUEST_CHOOSE_RECIPE && resultCode == Activity.RESULT_OK)
+        {
+            final long recipe_id = data.getLongExtra("recipe_id", 0);
+            if(recipe_id>0)
+            {
+                final MenuEntry me = new MenuEntry(this);
+                me.setQuantityMultiplier(1);
+                me.setDatetime(getSelectedDate());
+                me.setRecipe(new ModelFinder(this).getRecipe(recipe_id));
+                me.save();
+                findViewById(R.id.calendar_container).invalidate();
+            }
         }
-        return super.onOptionsItemSelected(item);
     }
 
     /**
@@ -71,8 +91,8 @@ public class ShowCalendar extends ActionBarActivity {
 
             //create the calendar widget here:
             final CalendarView calendar = new CalendarView(getActivity());
+            calendar.setId(0);
             calendar.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-           // calendar.setMinDate(System.currentTimeMillis()); /* workaround that prevents an error since default date = now  */
             calendar.setDate(System.currentTimeMillis());
             calendarContainer.addView(calendar);
             calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
@@ -81,6 +101,7 @@ public class ShowCalendar extends ActionBarActivity {
                     GregorianCalendar gc = new GregorianCalendar(year, month, dayOfMonth, 12, 00);
                     DayPreview prev = (DayPreview) getFragmentManager().findFragmentById(R.id.day_preview);
                     prev.setDate(gc.getTimeInMillis());
+                    ((ShowCalendar)getActivity()).setSelectedDate(gc.getTimeInMillis());
                 }
             });
 

@@ -97,7 +97,7 @@ public class MenuEntry extends DatabaseModel
             errors.add(new InputError(FIELD_DATETIME, context.getString(R.string.error_date_should_not_be_null)));
         }
 
-        return hasErrors();
+        return !hasErrors();
     }
 
     @Override

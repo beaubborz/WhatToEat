@@ -1,14 +1,17 @@
 package com.beaubbe.whattoeat.widgets;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.beaubbe.whattoeat.R;
+import com.beaubbe.whattoeat.activities.ListRecipes;
 import com.beaubbe.whattoeat.models.MenuEntry;
 import com.beaubbe.whattoeat.models.ModelFinder;
 import com.beaubbe.whattoeat.models.Recipe;
@@ -44,7 +47,9 @@ public class DayPreview extends Fragment {
 
     private void showRecipesForDate(long date)
     {
+        ((ViewGroup)root.findViewById(R.id.recipes)).removeAllViews();
         FragmentTransaction ft = getFragmentManager().beginTransaction();
+
         for(MenuEntry r:new ModelFinder(getActivity()).getMenuEntriesForDate(date))
         {
             ft.add(R.id.recipes, new RecipeListItem(r.getRecipe()));

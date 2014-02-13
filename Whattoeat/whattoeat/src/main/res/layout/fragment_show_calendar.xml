@@ -13,7 +13,8 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/calendar_container">
+        android:layout_below="@+id/calendar_container"
+        android:layout_above="@+id/add_button">
         <fragment
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -21,5 +22,13 @@
             android:name="com.beaubbe.whattoeat.widgets.DayPreview"
             tools:layout="@layout/day_preview_widget" />
     </FrameLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/add_button"
+        android:layout_alignParentBottom="true"
+        android:background="#AAAAFF"
+        android:text="add recipe..."
+        android:onClick="addRecipeToDate"/>
 
 </RelativeLayout>
