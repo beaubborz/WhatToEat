@@ -7,27 +7,14 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <activity android:name="com.beaubbe.whattoeat.activities.ListRecipes" >
-        </activity>
-        <activity android:name="com.beaubbe.whattoeat.activities.CreateRecipe" >
-        </activity>
-        <activity
-            android:name="com.beaubbe.whattoeat.activities.ViewRecipe"
-            android:label="@string/title_activity_view_recipe" >
-        </activity>
-        <activity
-            android:name="com.beaubbe.whattoeat.activities.MainMenu"
-            android:label="@string/title_activity_main_menu" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="com.beaubbe.whattoeat.activities.ShowCalendar"
-            android:label="@string/title_activity_show_calendar" >
-        </activity>
-    </application>
+            <activity android:name=".activities.RecipeView">
+                <intent-filter>
+                    <action android:name="android.intent.action.MAIN"/>
+                    <category android:name="android.intent.category.LAUNCHER" />
+                </intent-filter>
+            </activity>
+
+        </application>
 
 </manifest>

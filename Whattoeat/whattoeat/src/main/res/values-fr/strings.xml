@@ -2,7 +2,9 @@
 <resources>
 
     <string name="app_name">Qu\'est-ce qu\'on mange?</string>
-    <string name="title_activity_create_recipe">Nouvelle recette</string>
+    <string name="new_recipe">Nouvelle recette</string>
+    <string name="recipes">Recettes</string>
+    <string name="my_recipes">Mes recettes</string>
 
     <!-- input error messages -->
     <string name="error_name_cannot_be_blank">Vous devez entrer un nom</string>

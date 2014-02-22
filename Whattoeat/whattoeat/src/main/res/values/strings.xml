@@ -2,7 +2,12 @@
 <resources>
 
     <string name="app_name">What to eat?</string>
-    <string name="title_activity_create_recipe">Create a new recipe</string>
+    <string name="new_recipe">New recipe</string>
+    <string name="recipes">Recipes</string>
+    <string name="my_recipes">My recipes</string>
+    <string name="hint_name">Name</string>
+    <string name="label_portions">Portions: </string>
+    <string name="label_duration">Duration: </string>
 
     <!-- input error messages -->
     <string name="error_name_cannot_be_blank">Name cannot be blank</string>
@@ -11,28 +16,6 @@
     <string name="error_duplicate_steps">Multiple steps with the same number</string>
     <string name="error_description_cannot_be_blank">Description cannot be blank</string>
     <string name="error_quantity_must_be_positive">Quantity must be positive</string>
-
-    <!-- Units -->
-    <string name="unit">unit</string>
-    <string name="ml">ml</string>
-    <string name="liters">l</string>
-    <string name="cups">cup</string>
-    <string name="teaspoon">tsp</string>
-    <string name="tablespoon">tbp</string>
-    <string name="floz">fl oz</string>
-    <string name="gallon">gal</string>
-    <string name="gram">g</string>
-    <string name="pound">lbs</string>
-    <string name="kilogram">kg</string>
-    <string name="ounce">oz</string>
-
-    <!-- time duration unit -->
-    <string-array name="time_units">
-        <item>hours</item>
-        <item>minutes</item>
-        <item>seconds</item>
-    </string-array>
-
     <string name="title_activity_list_recipes">ListRecipes</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -41,5 +24,9 @@
     <string name="title_activity_main_menu">MainMenu</string>
     <string name="title_activity_show_calendar">ShowCalendar</string>
     <string name="error_date_should_not_be_null">Date is required</string>
+    <string name="title_item_list">Items</string>
+    <string name="title_item_detail">Item Detail</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_two_pane_recipe_list">Recipes</string>
 
 </resources>

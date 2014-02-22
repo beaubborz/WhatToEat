@@ -21,61 +21,59 @@ public class DatabaseManager extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        //create recipe table
-        final String recipeSQL = "CREATE TABLE "+ Recipe.TABLE_NAME+"(" +
-                Recipe.FIELD_ID+" INTEGER PRIMARY KEY AUTOINCREMENT," +
-                Recipe.FIELD_NAME+" TEXT NOT NULL" +
-                ")";
-
-        final String ingredientSQL = "CREATE TABLE "+ Ingredient.TABLE_NAME+"(" +
-                Ingredient.FIELD_ID+" INTEGER PRIMARY KEY AUTOINCREMENT," +
-                Ingredient.FIELD_NAME+" TEXT UNIQUE NOT NULL" +
-                ")";
-
-
-        //fais le lien entre les ingredients de chaque recette avec sa quantite.
-        final String recipe_ingredientSQL = "CREATE TABLE "+RecipeIngredient.TABLE_NAME+"(" +
-                RecipeIngredient.FIELD_ID+" INTEGER PRIMARY KEY AUTOINCREMENT," +
-                RecipeIngredient.FIELD_RECIPE_ID+" INTEGER NOT NULL," +
-                RecipeIngredient.FIELD_INGREDIENT_ID+" INTEGER NOT NULL," +
-                RecipeIngredient.FIELD_QUANTITY+" REAL,"+
-                RecipeIngredient.FIELD_UNIT_TYPE+" INTEGER,"+
-                "FOREIGN KEY ("+RecipeIngredient.FIELD_RECIPE_ID+") REFERENCES "+Recipe.TABLE_NAME+"("+Recipe.FIELD_ID+"),"+
-                "FOREIGN KEY ("+RecipeIngredient.FIELD_INGREDIENT_ID+") REFERENCES "+Ingredient.TABLE_NAME+"("+Ingredient.FIELD_ID+")"+
-                ")";
-
-        final String menu_SQL = "CREATE TABLE "+ MenuEntry.TABLE_NAME+"(" +
-                MenuEntry.FIELD_ID+" INTEGER PRIMARY KEY AUTOINCREMENT," +
-                MenuEntry.FIELD_RECIPE_ID+" INTEGER NOT NULL," +
-                MenuEntry.FIELD_DATETIME+" INTEGER NOT NULL," +
-                MenuEntry.FIELD_QUANTITY_MULTIPLIER+" REAL," +
-                "FOREIGN KEY ("+ MenuEntry.FIELD_RECIPE_ID+") REFERENCES "+Recipe.TABLE_NAME+"("+Recipe.FIELD_ID+")" +
-                ")";
-
-        //fais le lien entre les ingredients de chaque recette avec sa quantite.
-        final String recipe_stepsSQL = "CREATE TABLE "+ Step.TABLE_NAME+"(" +
-                Step.FIELD_ID+" INTEGER PRIMARY KEY AUTOINCREMENT," +
-                Step.FIELD_RECIPE_ID+" INTEGER NOT NULL," +
-                Step.FIELD_STEP+" INTEGER NOT NULL," +
-                Step.FIELD_DURATION+" INTEGER," +
-                Step.FIELD_DESCRIPTION+" TEXT,"+
-                "FOREIGN KEY ("+Step.FIELD_RECIPE_ID+") REFERENCES "+Recipe.TABLE_NAME+"("+Recipe.FIELD_ID+")"+
-                ")";
-
-        //on cree les tables!!
-        sqLiteDatabase.execSQL(recipeSQL);
-        sqLiteDatabase.execSQL(ingredientSQL);
-        sqLiteDatabase.execSQL(recipe_ingredientSQL);
-        sqLiteDatabase.execSQL(recipe_stepsSQL);
-        sqLiteDatabase.execSQL(menu_SQL);
-
-        //on active les FK
-        sqLiteDatabase.execSQL("PRAGMA foreign_keys = ON");
+    public void onCreate(SQLiteDatabase sqLiteDatabase)
+    {
+        createTableRecipe(sqLiteDatabase);
+        createTableIngredient(sqLiteDatabase);
+        createTableStep(sqLiteDatabase);
     }
 
-    @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i2) {
+    private void createTableRecipe(SQLiteDatabase db)
+    {
+        final String sql = "CREATE TABLE "+Recipe.TABLE_NAME+"(" +
+                Recipe.FIELD_ID+" INTEGER PRIMARY KEY AUTOINCREMENT," +
+                Recipe.FIELD_NAME+" TEXT NOT NULL," +
+                Recipe.FIELD_DURATION+" INTEGER DEFAULT 0," +
+                Recipe.FIELD_PORTIONS+" INTEGER DEFAULT 1," +
+                Recipe.FIELD_SCORE+" INTEGER DEFAULT 0," +
+                Recipe.FIELD_VOTES+" INTEGER DEFAULT 0," +
+                Recipe.FIELD_IMAGE_URL+" TEXT" +
+                ")";
 
+        db.execSQL(sql, null);
+    }
+
+    private void createTableIngredient(SQLiteDatabase db)
+    {
+        final String sql = "CREATE TABLE "+Ingredient.TABLE_NAME+"(" +
+                Ingredient.FIELD_ID+" INTEGER PRIMARY KEY AUTOINCREMENT," +
+                Ingredient.FIELD_RECIPE_ID+" INTEGER NOT NULL," +
+                Ingredient.FIELD_NAME+" TEXT NOT NULL," +
+                Ingredient.FIELD_QUANTITY+" REAL NOT NULL," +
+                Ingredient.FIELD_UNIT_TYPE+" TEXT NOT NULL," +
+                "FOREIGN KEY("+Ingredient.FIELD_RECIPE_ID+") REFERENCES "+Recipe.TABLE_NAME+"("+Recipe.FIELD_ID+")"+
+                ")";
+
+        db.execSQL(sql, null);
+    }
+
+    private void createTableStep(SQLiteDatabase db)
+    {
+        final String sql = "CREATE TABLE "+Step.TABLE_NAME+"(" +
+                Step.FIELD_ID+" INTEGER PRIMARY KEY AUTOINCREMENT," +
+                Step.FIELD_RECIPE_ID+" INTEGER NOT NULL," +
+                Step.FIELD_ORDER+" INTEGER NOT NULL," +
+                Step.FIELD_DESCRIPTION+" TEXT NOT NULL," +
+                "FOREIGN KEY("+Step.FIELD_RECIPE_ID+") REFERENCES "+Recipe.TABLE_NAME+"("+Recipe.FIELD_ID+")"+
+                ")";
+
+        db.execSQL(sql, null);
+    }
+
+
+    @Override
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int from, int to)
+    {
+        //TODO
     }
 }

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- name of the different amounts. used as value in DB. -->
+    <array name="unit_types">
+        <item>unit</item> <!-- reference for 'amount' -->
+        <item>ml</item> <!-- reference for 'volume' -->
+        <item>liter</item>
+        <item>gram</item> <!-- reference for 'mass' -->
+        <item>kilogram</item> <!-- reference for 'mass' -->
+    </array>
+
+    <!-- actual display of this unit -->
+    <array name="unit_names">
+        <item>unit</item><!-- unit -->
+        <item>ml</item><!-- ml -->
+        <item>l</item><!-- l -->
+        <item>g</item><!-- g -->
+        <item>kg</item><!-- kg -->
+    </array>
+
+    <!-- the type of the unit. used to convert between each other -->
+    <array name="unit_categories">
+        <item>amount</item><!-- unit -->
+        <item>volume</item><!-- ml -->
+        <item>volume</item><!-- l -->
+        <item>mass</item><!-- g -->
+        <item>mass</item><!-- kg -->
+    </array>
+
+    <!-- the modifier. Ex, kg is 1000x the reference value (gram) -->
+    <array name="unit_modifiers">
+        <item>1</item><!-- unit -->
+        <item>1</item><!-- ml -->
+        <item>1000</item><!-- l -->
+        <item>1</item><!-- g -->
+        <item>1000</item><!-- kg -->
+    </array>
+
+
+    <!-- time duration unit -->
+    <array name="time_units">
+        <item>hours</item>
+        <item>minutes</item>
+        <item>seconds</item>
+    </array>
+
+    <!-- time duration modifiers -->
+    <array name="time_modifiers">
+        <item>3600</item>
+        <item>60</item>
+        <item>1</item>
+    </array>
+</resources>

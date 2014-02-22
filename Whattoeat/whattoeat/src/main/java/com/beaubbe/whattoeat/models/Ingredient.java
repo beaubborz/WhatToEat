@@ -11,14 +11,21 @@ import com.beaubbe.whattoeat.R;
 /**
  * Created by Gab on 06/02/14.
  */
-public class Ingredient extends DatabaseModel
+public class Ingredient
 {
     public static final String TABLE_NAME = "ingredient";
     public static final String FIELD_ID = "id";
+    public static final String FIELD_RECIPE_ID = "recipe_id";
     public static final String FIELD_NAME = "name";
+    public static final String FIELD_QUANTITY = "quantity";
+    public static final String FIELD_UNIT_TYPE = "unit_type";
 
+    //DATABASE VALUES
     private long id;
+    private long recipe_id;
     private String name;
+    private double quantity;
+    private String unit_type;
 
     public long getId() {
         return id;
@@ -26,6 +33,14 @@ public class Ingredient extends DatabaseModel
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public long getRecipeId() {
+        return recipe_id;
+    }
+
+    public void setRecipeId(long recipe_id) {
+        this.recipe_id = recipe_id;
     }
 
     public String getName() {
@@ -36,59 +51,20 @@ public class Ingredient extends DatabaseModel
         this.name = name;
     }
 
-    public Ingredient(Context c)
-    {
-        super(c);
+    public double getQuantity() {
+        return quantity;
     }
 
-    @Override
-    public boolean save(SQLiteDatabase db) {
-        //data is not valid, we dont save.
-        if(!validate())
-            return false;
-
-        //prepare the data:
-        ContentValues values = new ContentValues();
-        values.put(FIELD_NAME, name);
-
-        if(getId() == 0)
-        {
-            this.id = db.insert(TABLE_NAME, null, values);
-        }
-        else
-        {
-            values.put(FIELD_ID, getId());
-            db.update(TABLE_NAME, values, FIELD_ID+"="+getId(), null);
-        }
-
-        return true;
+    public void setQuantity(double quantity) {
+        this.quantity = quantity;
     }
 
-    @Override
-    public boolean validate() {
-        boolean valid = name!=null && name.length()>0;
-        errors.clear();
-
-        if(!valid)
-        {
-            errors.add(new InputError(FIELD_NAME,context.getString(R.string.error_name_cannot_be_blank)));
-        }
-
-        return valid;
+    public String getUnit_type() {
+        return unit_type;
     }
 
-    @Override
-    public boolean removeFromDatabase(SQLiteDatabase db)
-    {
-        final String recipeIngredients = "SELECT * FROM "+RecipeIngredient.TABLE_NAME+" WHERE"+
-                RecipeIngredient.FIELD_INGREDIENT_ID+"="+getId();
-
-        Cursor c = db.rawQuery(recipeIngredients, null);
-
-        if(c.getCount()>0)
-            throw new SQLException("This item is still used by some RecipeIngredients!");
-
-        return db.delete(TABLE_NAME, Ingredient.FIELD_ID+"="+getId(), null)>0;
+    public void setUnit_type(String unit_type) {
+        this.unit_type = unit_type;
     }
 
     @Override

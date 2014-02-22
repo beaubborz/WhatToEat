@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/recipe_list_frame">
+
+    <TextView
+        style="@style/recipe_list_subtitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/label_my_recipes"
+        android:gravity="center_horizontal"
+        android:text="@string/my_recipes"/>
+    <View
+        style="@style/recipe_list_separator"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:id="@+id/my_recipe_separator"
+        android:layout_below="@+id/label_my_recipes"
+    />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/my_recipe_separator"
+        android:id="@+id/list_my_recipes"/>
+
+    <com.beaubbe.whattoeat.widgets.RecipeListItem
+        style="@style/recipe_list_item_create_new"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/list_my_recipes"
+        android:padding="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:id="@+id/item_new_recipe"
+        app:recipeId="0"
+        android:text="New recipe..."/>
+</RelativeLayout>

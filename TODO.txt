@@ -9,8 +9,8 @@ Executer recettes - pertinent..? au pire on lis la recette dans View et cest tou
 filtrer liste des recettes par ingredient, temps de preparation...
 
 ---- menu de la semaine ----
-Afficher un calendrier
-Placer des recettes dans les cases de jours du calendrier
+Afficher un calendrier     ok
+Placer des recettes dans les cases de jours du calendrier     ok
 Retirer des recettes du menu.
 
 ----- epicerie -----
